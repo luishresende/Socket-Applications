@@ -16,4 +16,4 @@ with open(file_path, 'r') as arq:
 
 HOST = "127.0.0.1"  # Endereço do servidor
 PORT = 40000  # Porta para escutar
-DATABASE_UPDATE = threading.Semaphore(value=1) # Semáforo para controlar o acesso ao banco de dados
+DATABASE = threading.Semaphore(value=1) # Semáforo para controlar o acesso ao banco de dados

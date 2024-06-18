@@ -26,4 +26,3 @@ PORT = 40004  # Porta para escutar
 
 from .query import Query
 query = Query()
-print(products)

@@ -12,46 +12,45 @@ def parse_message(msg):
 
 def get_fortune():
     # Retorna uma frase aleatória do banco de dados
-    message_id = random.randint(0, len(data) - 1)
-    return data[message_id]
+    with DATABASE:
+        message_id = random.randint(0, len(data) - 1)
+        return data[message_id]
 
 
 def add_fortune(fortune):
     # Adicionando a frase ao banco de dados
-    with DATABASE_UPDATE:
-        with open('fortune-cookies.txt', 'a') as db:
-            db.write(fortune + '\n')
+    with DATABASE:
+        with open(file_path, 'w') as db:
+            data.append(fortune)
+            db.write('\n'.join(data))
     return f'Fortune adicionado com sucesso: <{fortune}>'
 
 
 def update_fortune(pos, fortune):
-    # Se a posição for igual a -1, a posição assume o valor da última frase
-    if pos == -1:
-        pos = len(data) - 1
+    with DATABASE:
+        # Se a posição for igual a -1, a posição assume o valor da última frase
+        if pos == -1:
+            pos = len(data) - 1
 
-    # Se a posição estiver fora do intervalo, retorna uma mensagem de erro
-    elif pos < 1 or pos > len(data):
-        return f'Posição inválida: {pos}'
+        # Se a posição estiver fora do intervalo, retorna uma mensagem de erro
+        elif pos < 1 or pos > len(data):
+            return f'Posição inválida: {pos}'
 
-    # Se nenhum erro é econtrado, a posição é ajustada para o índice da lista
-    else:
-        pos -= 1
+        # Se nenhum erro é econtrado, a posição é ajustada para o índice da lista
+        else:
+            pos -= 1
 
-    # Adicionando a quebra de linha ao Fortune, caso não tenha
-    if not fortune.endswith('\n'):
-        fortune += '\n'
-
-    # Atualizando a frase no banco de dados
-    with DATABASE_UPDATE:
+        # Atualizando a frase no banco de dados
         data[pos] = fortune
-        with open('fortune-cookies.txt', 'w') as db:
+        with open(file_path, 'w') as db:
             db.write('\n'.join(data))
     return f'Fortune atualizado com sucesso na posição {pos + 1}: <{fortune}>'
 
 
 def list_fortunes():
     # Retorna todas as frases do banco de dados
-    return '\n'.join(data)
+    with DATABASE:
+        return '\n'.join(data)
 
 
 def fortune_commands(msg):
@@ -87,7 +86,7 @@ def fortune_commands(msg):
                     'atualizada e o segundo é a nova frase')
 
         # Verifica se o segundo argumento é um número
-        elif not args[1].isnumeric():
+        elif not args[1].isnumeric() and args[1] != '-1':
             return 'A posição da frase a ser atualizada deve ser um número inteiro'
 
         else:

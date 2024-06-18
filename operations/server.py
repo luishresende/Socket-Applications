@@ -35,7 +35,7 @@ def operations_commands(data):
     if len(args) < 3:
         return 'Número insuficiente de argumentos'
 
-    operation = args[-1]
+    operation = args[0]
 
     # Verificando se é uma operação que está dentro das permitidas
     if operation not in ['SUM', 'MULT', 'MEAN', 'MEDIAN']:
