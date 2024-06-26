@@ -33,5 +33,7 @@ def connect_to_server(store_id): # Função para conectar ao servidor
 
 
 def run():
+
     for new_id in range(10): # Loop para criar 10 lojas
         threading.Thread(target=connect_to_server, args=(new_id,)).start()
+

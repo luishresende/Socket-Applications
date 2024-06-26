@@ -17,17 +17,19 @@ def chain_commands(msg):
     else:
         return 'Comando inválido' # Se não houver argumentos, retorna uma mensagem de erro
 
+
     if command == 'VENDA': # Se o comando for 'VENDA'
         if len(args) != 4: # Se o número de argumentos for diferente de 4
-            return 'O comando "VENDA" espera três argumentos. Ex: "VENDA <id_produto> <quantidade>"'
+            return 'O comando "VENDA" espera quatro argumentos. Ex: "VENDA <id_produto> <quantidade>"'
         threading.Thread(target=query.update_balance, args=(args[1], args[2], args[3], 'VENDA')).start() # Inicia uma nova thread para atualizar o balanço
         return 'Registro encaminhado' # Retorna uma mensagem de confirmação
 
     elif command == 'COMPRA': # Se o comando for 'COMPRA'
         if len(args) != 4: # Se o número de argumentos for diferente de 4
-            return 'O comando "COMPRA" espera três argumentos. Ex: "COMPRA <id_produto> <quantidade>"'
+            return 'O comando "COMPRA" espera quatro argumentos. Ex: "COMPRA <id_produto> <quantidade>"'
         threading.Thread(target=query.update_balance, args=(args[1], args[2], args[3], 'COMPRA')).start() # Inicia uma nova thread para atualizar o balanço
         return 'Registro encaminhado' # Retorna uma mensagem de confirmação
+
 
     else:
         return 'Comando inexistente.' # Se o comando não for 'VENDA' ou 'COMPRA', retorna uma mensagem de erro

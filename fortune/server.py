@@ -70,7 +70,7 @@ def fortune_commands(msg):
 
     elif command == 'ADD-FORTUNE':
         # Verifica se há um segundo argumento
-        if not args[1]:
+        if len(args) < 2:
             return 'É esperado um segundo argumento para a função "ADD-FORTUNE"'
 
         # Verifica se há mais de um argumento
@@ -112,8 +112,8 @@ def handle_client(conn, addr):
             # Recebe a mensagem do cliente
             msg = conn.recv(8192)
             if not msg:
+                print(f"Cliente desconectado {addr}")
                 break
-
             # Processa a mensagem e envia a resposta
             response = fortune_commands(msg.decode())
 

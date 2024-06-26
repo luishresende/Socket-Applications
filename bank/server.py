@@ -32,8 +32,11 @@ def bank_commands(session_id, msg): # Função que processa os comandos do banco
     if command == 'SALDO':
         if len(args) != 1:
             return 'O comando "SALDO" não espera argumentos.'
+
         print(clients[session_id])
         # Retorna o saldo da conta associada ao session_id
+
+        main
         return clients[session_id]['account'].get_balance()
 
     elif command == 'SAQUE':
@@ -78,14 +81,21 @@ def bank_commands(session_id, msg): # Função que processa os comandos do banco
                     'uma conta.')
 
         if amount < 0:
-            return 'Não é possível realizar o depósito de um valor negativo.'
+            return 'Não é possível realizar a transferência de um valor negativo.'
 
         destination_account = get_account(requested_account_number) # Obtém a conta de destino
 
         if not destination_account:
             return 'Conta destino não encontrada!'
 
+
         return clients[session_id]['account'].transfer(amount, destination_account) # Realiza a transferência
+
+        if destination_account == clients[session_id]['account']:
+            return 'Não é possível realizar transferência para a mesma conta.'
+
+
+
 
     else:
         return 'Comando inexistente.'

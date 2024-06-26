@@ -12,11 +12,13 @@ class Query(threading.Thread):
     def run(self):
         while True: # Loop para exibir as movimentações
             with self.semaphore:
+
                 if self.querys: # Se houver movimentações, exibe
                     print('Movimentações: ')
                     for msg in self.querys:
                         print(msg)
                     balance = self.balance[0] - self.balance[1] # Calcula o balanço geral
+
 
                     # Se o balanço geral for maior ou igual a 0, saldo fica verde, caso contrário, vermelho
                     if balance >= 0:
