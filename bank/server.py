@@ -83,6 +83,9 @@ def bank_commands(session_id, msg):
         if not destination_account:
             return 'Conta destino não encontrada!'
 
+        if destination_account == clients[session_id]['account']:
+            return 'Não é possível realizar transferência para a mesma conta.'
+
         return clients[session_id]['account'].transfer(amount, destination_account)
 
     else:
