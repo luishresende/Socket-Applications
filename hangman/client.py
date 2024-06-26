@@ -3,9 +3,9 @@ from hangman import *
 
 
 def connect_to_server():
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect((HOST, PORT))
-        response = s.recv(1024)
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: # Cria um objeto de socket para comunicação TCP.
+        s.connect((HOST, PORT)) # Conecta ao servidor usando o endereço HOST e a porta PORT.
+        response = s.recv(1024) # Recebe a resposta inicial do servidor (até 1024 bytes) e imprime no console.
         print(f"Resposta do servidor: \n{response.decode()}")
         while True:
             # Recebe comando do usuário
