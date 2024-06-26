@@ -22,4 +22,4 @@ with open(file_path, 'r') as arq:
 
 clients = {}
 HOST = "127.0.0.1"  # Endereço do servidor
-PORT = 40003  # Porta para escutar
+PORT = 40009  # Porta para escutar

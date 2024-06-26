@@ -7,7 +7,7 @@ from hangman import *
 
 # Retorna uma palavra do banco de dados
 def get_word():
-    return words[random.randint(0, len(words))]
+    return words[random.randint(0, len(words) - 1)]
 
 
 def process_word(player):
@@ -92,7 +92,6 @@ def process_response(msg, player):
 
 
 def handle_client(conn, addr):
-    print(f'{conn}')
     word_player = get_word() # Obtendo letra dentro da lista
     word_game = ('_ ' * len(word_player['content']))[:-1] # Obtendo a palavra do jogo com traços no lugar das letras
     player = {

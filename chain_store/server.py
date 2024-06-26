@@ -19,13 +19,13 @@ def chain_commands(msg):
 
     if command == 'VENDA':
         if len(args) != 4:
-            return 'O comando "VENDA" espera três argumentos. Ex: "VENDA <id_produto> <quantidade>"'
+            return 'O comando "VENDA" espera quatro argumentos. Ex: "VENDA <id_loja> <id_produto> <quantidade>"'
         threading.Thread(target=query.update_balance, args=(args[1], args[2], args[3], 'VENDA')).start()
         return 'Registro encaminhado'
 
     elif command == 'COMPRA':
         if len(args) != 4:
-            return 'O comando "COMRA" espera três argumentos. Ex: "COMPRA <id_produto> <quantidade>"'
+            return 'O comando "COMRA" espera quatro argumentos. Ex: "COMPRA <id_loja> <id_produto> <quantidade>"'
         threading.Thread(target=query.update_balance, args=(args[1], args[2], args[3], 'COMPRA')).start()
         return 'Registro encaminhado'
 

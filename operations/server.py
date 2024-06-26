@@ -31,7 +31,6 @@ def median(numbers):
 
 def operations_commands(data):
     args = data.strip().split()
-    print(args)
     if len(args) < 3:
         return 'Número insuficiente de argumentos'
 
@@ -41,10 +40,11 @@ def operations_commands(data):
     if operation not in ['SUM', 'MULT', 'MEAN', 'MEDIAN']:
         return 'Operação inválida'
 
-    nums = args[:len(args) - 1] # Criando uma lista apenas com os números
+    nums = args[1:] # Criando uma lista apenas com os números
+
     for i, num in enumerate(nums):
         try:
-            nums[i] = int(args[i])
+            nums[i] = int(nums[i])
         except ValueError:
             return f'Argumento inválido na posição {i + 1}. Espera-se um valor inteiro.'
 

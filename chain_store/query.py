@@ -13,9 +13,10 @@ class Query(threading.Thread):
         while True:
             with self.semaphore:
                 if self.querys:
-                    print('Movimentações: ')
+                    print('\n\nMovimentações: ')
                     for msg in self.querys:
                         print(msg)
+
                     balance = self.balance[0] - self.balance[1]
 
                     # Se o balanço geral for maior ou igual a 0, saldo fica verde, caso contrário, vermelho

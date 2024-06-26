@@ -32,7 +32,6 @@ def bank_commands(session_id, msg):
     if command == 'SALDO':
         if len(args) != 1:
             return 'O comando "SALDO" não espera argumentos.'
-        print(clients[session_id])
         return clients[session_id]['account'].get_balance()
 
     elif command == 'SAQUE':
@@ -77,7 +76,7 @@ def bank_commands(session_id, msg):
                     'uma conta.')
 
         if amount < 0:
-            return 'Não é possível realizar o depósito de um valor negativo.'
+            return 'Não é possível realizar a transferência de um valor negativo.'
 
         destination_account = get_account(requested_account_number)
 
