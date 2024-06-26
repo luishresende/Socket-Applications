@@ -5,16 +5,16 @@ import random
 import time
 
 
-# Obtém o caminho do diretório onde este script está localizado
+# Define o caminho do diretório onde o script está localizado e o caminho para um arquivo chamado 'products.txt'
 script_dir = os.path.dirname(__file__)
 file_path = os.path.join(script_dir, 'products.txt')
 
-products = {}
+products = {} # Dicionário para armazenar os produtos
 # Lendo frases do banco de dados (arquivo txt)
 with open(file_path, 'r') as arq:
-    data = arq.read().split('\n')
+    data = arq.read().split('\n') # Lendo o arquivo e dividindo as linhas
     product_id = 1
-    for i in range(0, len(data), 3):
+    for i in range(0, len(data), 3): # A cada 3 linhas um novo produto é adicionado
         products[product_id] = {'name': data[i], 'price': float(data[i + 1])}
         product_id += 1
     arq.close()

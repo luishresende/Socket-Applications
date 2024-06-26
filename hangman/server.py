@@ -7,7 +7,7 @@ from hangman import *
 
 # Retorna uma palavra do banco de dados
 def get_word():
-    return words[random.randint(0, len(words))]
+    return words[random.randint(0, len(words))] # # Seleciona uma palavra aleatória do banco de palavras
 
 
 def process_word(player):
@@ -17,7 +17,7 @@ def process_word(player):
     new_word_game = []
     for letter in player['word']['content']:
         # Verificando se a letra do usuário está na palavra
-        if unidecode(letter).upper() in player['letters']: # Unidecode desconsidera acentos
+        if unidecode(letter).upper() in player['letters']: # Verifica se a letra (sem acento) está nas letras escolhidas
             # Se estiver, adiciono a letra na lista de letras do jogo
             new_word_game.append(letter.upper())
         else:
@@ -92,15 +92,15 @@ def process_response(msg, player):
 
 
 def handle_client(conn, addr):
-    print(f'{conn}')
-    word_player = get_word() # Obtendo letra dentro da lista
+    print(f'{conn}') # Imprime a conexão do cliente para controle
+    word_player = get_word() # Obtém uma palavra do banco de palavras
     word_game = ('_ ' * len(word_player['content']))[:-1] # Obtendo a palavra do jogo com traços no lugar das letras
     player = {
-        'addr': addr,
-        'lifes': 7,
-        'letters': [],
-        'word': word_player,
-        'word_game': word_game
+        'addr': addr, # Endereço do cliente conectado
+        'lifes': 7, # Número inicial de vidas
+        'letters': [], # Lista de letras escolhidas pelo jogador
+        'word': word_player, # Palavra selecionada para o jogo
+        'word_game': word_game # Estado inicial da palavra do jogo com traços
     }
     with (conn):
         # Construindo a mensagem inicial e enviando para o usuário
@@ -127,13 +127,13 @@ def handle_client(conn, addr):
 def run():
     # Inicializa o servidor
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind((HOST, PORT))
-        s.listen()
+        s.bind((HOST, PORT)) # Associa o servidor ao endereço HOST e porta PORT
+        s.listen() # Aguarda por conexões de clientes
         print(f"Servidor escutando em {HOST}:{PORT}")
 
         # Aceitando conexões de clientes
         while True:
-            conn, addr = s.accept()
+            conn, addr = s.accept() # Aceita uma conexão
 
             # Cria uma nova thread para lidar com o cliente
             client_thread = threading.Thread(target=handle_client, args=(conn, addr))

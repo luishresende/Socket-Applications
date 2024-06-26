@@ -5,7 +5,7 @@ import socket
 
 
 def parse_message(msg):
-    # shlex.split para dividir a mensagem em argumentos
+    # Utiliza shlex.split para dividir a mensagem em argumentos
     args = shlex.split(msg)
     return args
 
@@ -18,7 +18,7 @@ def get_fortune():
 
 
 def add_fortune(fortune):
-    # Adicionando a frase ao banco de dados
+    # Adiciona uma nova frase ao banco de dados e a salva em um arquivo.
     with DATABASE:
         with open(file_path, 'w') as db:
             data.append(fortune)
@@ -27,6 +27,7 @@ def add_fortune(fortune):
 
 
 def update_fortune(pos, fortune):
+    # Atualiza uma frase existente no banco de dados, baseando-se na posição fornecida.
     with DATABASE:
         # Se a posição for igual a -1, a posição assume o valor da última frase
         if pos == -1:
@@ -48,11 +49,11 @@ def update_fortune(pos, fortune):
 
 
 def list_fortunes():
-    # Retorna todas as frases do banco de dados
+    # Retorna todas as frases do banco de dados como uma string.
     with DATABASE:
         return '\n'.join(data)
 
-
+# Processa os comandos recebidos e chama as funções apropriadas com base no comando.
 def fortune_commands(msg):
     # Parseando a mensagem
     args = parse_message(msg)
@@ -103,7 +104,7 @@ def fortune_commands(msg):
     else:
         return f'Comando inválido: {msg}'
 
-
+# Lida com a comunicação com um cliente, recebendo mensagens e respondendo de acordo com os comandos processados.
 def handle_client(conn, addr):
     print(f"Novo usuário: {addr}")
     with conn:
@@ -121,7 +122,7 @@ def handle_client(conn, addr):
             else:
                 break
 
-
+# Inicializa o servidor, aceita conexões de clientes e cria novas threads para lidar com cada cliente.
 def run():
     # Inicializa o servidor
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -136,5 +137,3 @@ def run():
             # Cria uma nova thread para lidar com o cliente
             client_thread = threading.Thread(target=handle_client, args=(conn, addr))
             client_thread.start()
-
-

@@ -4,7 +4,7 @@ from operations import *
 
 def connect_to_server():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        # Conecta com o servidor
+        # Conecta com o servidor utilizando o HOST e PORT
         s.connect((HOST, PORT))
         print(f"Conectado ao servidor {HOST}:{PORT}")
         print('Envie uma lista de inteiros separadas por espaço, com a especificação da operação no final.\n'

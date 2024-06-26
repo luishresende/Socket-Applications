@@ -8,10 +8,10 @@ file_path = os.path.join(script_dir, 'fortune-cookies.txt')
 
 # Lendo frases do banco de dados (arquivo txt)
 with open(file_path, 'r') as arq:
-    data = arq.read().split('\n')
-    if data[-1] == '':
+    data = arq.read().split('\n')  # Lê o conteúdo do arquivo e divide por linhas
+    if data[-1] == '':  # Remove a última linha se estiver vazia
         data.pop()
-    arq.close()
+    arq.close() # Fecha o arquivo após a leitura
 
 
 HOST = "127.0.0.1"  # Endereço do servidor
